@@ -1,0 +1,158 @@
+@charset "UTF-8";
+/************************************************************************************
+RESET
+*************************************************************************************/
+html, body, address, blockquote, div, dl, form, h1, h2, h3, h4, h5, h6, ol, p, pre, table, ul,
+dd, dt, li, tbody, td, tfoot, th, thead, tr, button, del, ins, map, object,
+a, abbr, acronym, b, bdo, big, br, cite, code, dfn, em, i, img, kbd, q, samp, small, span,
+strong, sub, sup, tt, var, legend, fieldset {
+    margin: 0;
+    padding: 0;
+}
+
+img, fieldset {
+    border: 0;
+}
+
+/* set image max width to 100% */
+img {
+    max-width: 100%;
+    -ms-interpolation-mode: bicubic;
+    height: auto;
+    width: auto\9; /* ie8 */
+}
+a{text-decoration: none;}
+/* set html5 elements to block */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { 
+    display: block;
+}
+/* 改变动画的效果方式*/
+* {
+  -webkit-transition-timing-function: ease-in-out;
+     -moz-transition-timing-function: ease-in-out;
+      -ms-transition-timing-function: ease-in-out;
+       -o-transition-timing-function: ease-in-out;
+          transition-timing-function: ease-in-out;
+}
+/************************************************************************************
+GENERAL STYLING
+*************************************************************************************/
+html,body{padding: 0;margin: 0;width: 100%;height: 100%;background: #fff;}
+/************************************************************************************
+SILDER STYLING
+*************************************************************************************/
+.flexslider { position: relative; height: 290px; overflow: hidden; background: url(../images/loading.gif) 50% no-repeat;}
+.slides { position: relative; z-index: 1;}
+.slides li { height: 290px;}
+.slides li img { width:100%;}
+.flex-control-nav { position: absolute; bottom: 10px; z-index: 2; width: 100%; text-align: center;}
+.flex-control-nav li { display: inline-block; width: 14px; height: 14px; margin: 0 5px; *display: inline; zoom: 1;}
+.flex-control-nav a { display: inline-block; width: 14px; height: 14px; line-height: 40px; overflow: hidden; 
+  background: url(../images/dot.png) right 0 no-repeat; cursor: pointer;}
+.flex-control-nav .flex-active { background-position: 0 0;}
+/************************************************************************************
+title STYLING
+*************************************************************************************/ 
+.title{ height:100px;width:100%; background: -moz-linear-gradient(60deg, #990000, #780202);
+  background: -webkit-gradient(linear,0 100%,100% 0%,from(#990000),to(#780202));
+  background: -webkit-linear-gradient(60deg, #990000, #780202);
+  background: -o-linear-gradient(60deg, #990000, #780202);
+  filter: progid:DXImageTransform.Microsoft.gradient(startcolorstr=#990000,endcolorstr=#780202,gradientType=1);
+}
+#prize{float: left;width:55%;margin:20px 0 0 8px;background: url(../images/sprites.png) no-repeat   0 -192px;
+ }
+#prize p{margin-left:60px;}
+.prize1{font: normal  1.9em "黑体" ; color: #fff;margin-bottom: 10px;}
+.prize2{font: bold  1em "黑体"; color: #98603d;width: 150px; margin-bottom: 10px;}
+#time{float: left;width:40%;background: url(../images/sprites.png) no-repeat 0 -814px;  margin-top: 20px;}
+.time1{margin:3px 0 0 30px;font: normal  1em "黑体"; color: #98603d;}
+.time2{font: normal  1.5em "黑体" ; color: #fff;margin-top: 15px;}
+/************************************************************************************
+personinfo STYLING
+*************************************************************************************/ 
+.personinfo p{ font: normal  1em "黑体";color: #8e0101;margin-bottom: 4px;}
+.personinfo{margin:15px 0 0 12px;}
+.share{margin-top: 35px;}
+.share li{float: left;list-style: none;font:normal  .8em "黑体";color:#590404;padding-bottom: 20px; }
+.share_li1{width: 35%; margin:6px 0 0 12px;}
+.share_li2{width: 33%}
+.share_li3{margin-top: 8px;padding-left: 5px;}
+.share_li3 a{font-size: .9em;color: #660000;text-decoration: underline;}
+.clr { clear:both; padding:0; margin:0; background:none; }
+/************************************************************************************
+menu STYLING
+*************************************************************************************/ 
+.menu{height: 60px;margin-bottom: 3px;}
+.menu li{list-style: none;float: left;height: 35px; margin:10px 0 0 1%;border: solid 3px #8f4c30;border-radius: 9px;}
+.mli1{width: 30%;}
+.mli2{width: 30%;}
+.mli3{width: 30%}
+.bgli{margin: 5px 0 0 0;font:normal  .9em "黑体"; height: 30px;}
+.bgli1{background: url(../images/sprites.png) no-repeat 0 -510px;}
+.bgli2{background: url(../images/sprites.png) no-repeat 0 -290px;}
+.bgli3{background: url(../images/sprites.png) no-repeat 0 -669px;}
+.bgli1 a{display:block;padding:5px 0 0 30%;color: #fff;}
+.bgli2 a,.bgli3 a{display:block;padding:5px 0 0 30%;color: #8f4c30;}
+
+/************************************************************************************
+toolBar STYLING
+*************************************************************************************/ 
+#pai{background-color: #eeeeee;position: fixed;bottom: 0px;z-index:100;width: 100%;height: 60px;font: bold .9em "黑体";color: #fff;
+border-bottom: 3px solid #eaeaea; }
+#pai li{list-style: none;float: left;}
+.circle{width:16%;border-right:2px dotted #dcdcdc;height:50px;margin: 6px 0 0 3%; }
+.origin{background: url(../images/sprites.png)  no-repeat 0 0;}
+.hover{background: url(../images/sprites.png) no-repeat  0 -96px;}
+.circleCnt{color: #000;margin: 16px 0 0 4px;}
+.hammer{background: url(../images/sprites.png) no-repeat 0 -585px;height:50px;width:39%;margin:12px 0 0 2%;}
+.hammerCnt{font-size: 1.1em;margin:7px 0 0 10%;}
+/************************************************************************************
+竞拍记录 STYLING
+*************************************************************************************/ 
+.title1{height: 30px;}
+.titlebg1{float:left;background: url(../images/sprites.png) no-repeat 0 -435px;height: 25px;margin: 3px 0 0 10px;}
+.title1 p{display: block;margin:3px 0 0 30px;font: normal 1em "黑体";color: #fff;}
+.crown{float: left;width: 7%;margin-top: 30px;margin-left: 2%}
+#list{float: left;width: 90%;}
+.recordtitle li{list-style: none;float: left;margin-top:10px;font: bold 1.1em "黑体";border-right: 1px solid #737373;text-align: center;}
+.recordtitle li:nth-child(1){width: 20%;}
+.recordtitle li:nth-child(2){width: 43%;}
+.recordtitle li:nth-child(3){width: 28%;border-right: none;}
+.recordlist li{list-style: none;float: left;margin-top:5px;font: normal 1em "黑体";border-bottom: 2px dotted #dcdcdc;text-align: center;}
+.recordlist li:nth-child(1){width: 20%;}
+.recordlist li:nth-child(2){width: 43%;}
+.recordlist li:nth-child(3){width: 28%;}
+.recordlist ul:nth-child(1){color: #a12626;}
+.total{width:100%;font: normal 1em "黑体";color: #a12626 ;text-align: center;margin: 10px 0 ;}
+/************************************************************************************
+拍品介绍 STYLING
+*************************************************************************************/
+.titlebg2{float:left;background: url(../images/sprites.png) no-repeat 0 -365px;height: 25px;margin: 3px 0 0 10px;}
+.jieshaoCnt{padding: 10px 10px 0;font: normal .9em "黑体";}
+.jieshaoCnt p{line-height: 150%;}
+.pinm{margin: 20px 0;font-size: 0.85em;}
+.pinm p{border-bottom: 1px dotted #dddddd;}
+.show span{font: bold 1.5em "黑体";color: #990000;text-shadow:2px 0px 4px #dadada; padding-left: 10px;margin-bottom: 10px;}
+.show p{display:block;padding-left:10px;font: normal .8em "黑体";line-height: 150%;}
+/************************************************************************************
+分享抵现规则 STYLING
+*************************************************************************************/
+.dixian{margin-top:20px;height: 30px;width:100%; background: -moz-linear-gradient(60deg, #990000, #780202);
+  background: -webkit-gradient(linear,0 100%,100% 0%,from(#990000),to(#780202));
+  background: -webkit-linear-gradient(60deg, #990000, #780202);
+  background: -o-linear-gradient(60deg, #990000, #780202);
+  filter: progid:DXImageTransform.Microsoft.gradient(startcolorstr=#990000,endcolorstr=#780202,gradientType=1);}
+.dixian p{display: block;float:left;margin:3px 0 0 10px;font: normal 1em "黑体";color: #fff;}
+.dixian_part1{display: block;font: normal .8em "黑体";margin:10px 0 0 9px;}
+.dixian_part2{font: normal .8em "黑体";margin:20px 0;}
+.dixian_part2 p{margin-left: 20px;}
+#dixian p{line-height: 150%;}
+/************************************************************************************
+拍卖规则 STYLING
+*************************************************************************************/
+.titlebg3{float:left;background: url(../images/sprites.png) no-repeat  0 -744px;height: 25px;margin: 3px 0 0 10px;}
+#rules{background-color:#eeeeee;padding-bottom: 55px; }
+.rulesCnt ul li {display:block; font: normal .8em "黑体";color: #990000;margin: 10px 10px;
+border-bottom: 1px solid #dcdcdc;padding: 10px 0; }
+
+.rulesCnt span{color: #000;margin-left: 15px;line-height: 150%;}

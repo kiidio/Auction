@@ -1,0 +1,23 @@
+{
+	"now":"Thu Jan 15 2015 12:43:12 GMT+0800 (CST)",
+	"end_time":"Thu Jan 15 2015 22:00:00 GMT+0800 (CST)",
+	"start_time":"Thu Jan 15 2015 10:00:00 GMT+0800 (CST)",
+	"current":{
+		"price":"2000",
+		"count":"3"
+	},
+	"list":[
+	{ "price":"1500",
+	  "mobile":"139****1111",
+	  "time":"10:11:12"},
+
+	  { "price":"1600",
+	  "mobile":"139****1111",
+	  "time":"10:11:15"},
+
+	  { "price":"1900",
+	  "mobile":"139****1111",
+	  "time":"10:11:16"}
+	]
+
+}
