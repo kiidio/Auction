@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
  <head>
-  <title>竞拍平台</title>
+  <title>喜迎旗下宝懿天猫旗舰店上线与众玩家狂欢0元起拍</title>
   
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="css/main.css" />
+  <link rel="stylesheet" type="text/css" href="__CSS__/main.css" />
   
  </head>
  
@@ -13,23 +13,23 @@
 <!--图片轮播 -->  
 <div class="flexslider">
   <ul class="slides">
-    <li style="background: url(images/img1.jpg) no-repeat center center scroll;position: relative;
+    <li style="background: url( __IMAGES__/img1.jpg) no-repeat center center scroll;position: relative;
   background-size:100% 100%;"></li>
-    <li style="background: url(images/img2.jpg) no-repeat center center scroll;position: relative;
+    <li style="background: url( __IMAGES__/img2.jpg) no-repeat center center scroll;position: relative;
   background-size:100% 100%;"></li>
-    <li style="background: url(images/img3.jpg) no-repeat center center scroll;position: relative;
+    <li style="background: url( __IMAGES__/img3.jpg) no-repeat center center scroll;position: relative;
   background-size:100% 100%;"></li>
-    <li style="background: url(images/img4.jpg) no-repeat center center scroll;position: relative;
+    <li style="background: url( __IMAGES__/img4.jpg) no-repeat center center scroll;position: relative;
   background-size:100% 100%;"></li>
-    <li style="background: url(images/img5.jpg) no-repeat center center scroll;position: relative;
+    <li style="background: url( __IMAGES__/img5.jpg) no-repeat center center scroll;position: relative;
   background-size:100% 100%;"></li>
   </ul>
 </div>
 <!--拍卖价格和时间 -->  
 <div class="title">
  <div id="prize">
-    <p class="prize1">￥1500</p>
-    <p class="prize2"> 一口价 ￥8888</p>
+    <p class="prize1">￥{{$data.proprice}}</p>
+    <p class="prize2"> 一口价 ￥{{$data.fixedprice}}</p>
  </div>
  <div id="time">
    <p class="time1" >剩余时间</p>
@@ -40,12 +40,14 @@
 <!--个人账号信息 -->  
 <div class="info">
   <div class="personinfo">
+  <if condition="$nickname neq ''">
     <p style="font-weight:bold;">账号信息</p>
-    <p>我的账号：Ling</p>
+    <p>我的账号：{{$nickname}}</p>
+  </if>
   </div>
   <div class="share">
     <li class="share_li1">分享朋友可抵50元</li>
-    <li class="share_li2"><img src="images/share.png" width="112px" id="share" alt=""/></li>
+    <li class="share_li2"><img src=" __IMAGES__/share.png" width="112px" id="share" alt=""/></li>
     <li class="share_li3"><a href="#dixian">【使用规则】</a></li>
   </div>
 </div>
@@ -63,7 +65,7 @@
   <li class="circle origin"><div class="circleCnt" ><p>+100</p></div></li>
   <li class="circle origin"><div class="circleCnt"><p>+300</p></div></li>
   <li class="circle hover ykj"><div class="circleCnt" style="font-size:.8em"><p>一口价</p></div></li>
-  <li class="hammer"><div class="hammerCnt" ><p id="pai_prize">8888拍</p></div></li>
+  <li class="hammer"><div class="hammerCnt" ><p id="pai_prize">{{$data.fixedprice}}拍</p></div></li>
 </div>
 <div class="clr"></div>
 
@@ -74,7 +76,7 @@
 
 
 <div>
-    <div class="crown"><img src="images/crown.png" alt=" " /></div>
+    <div class="crown"><img src=" __IMAGES__/crown.png" alt=" " /></div>
     <div id="list">
        <div class="recordtitle">
            <ul>
@@ -86,30 +88,14 @@
        <div class="clr"></div>
     
        <div class="recordlist">
-          <ul>
-            <li >￥2000</li>
-            <li >136****9232</li>
-            <li >12:12:12</li>
-          </ul>
-
-        <ul>
-           <li>￥2000</li>
-           <li>136****9232</li>
-           <li>**:**:**</li>
-        </ul>
-
-        <ul>
-          <li>￥2000</li>
-          <li>136****9232</li>
-          <li>**:**:**</li>
-        </ul>
+          
       </div> 
   </div>
 </div>
 
 
   <div class="clr"></div>
-  <div class="total" >参与竞拍次数：<span><u>5</u> </span></div>
+  <div class="total" >参与竞拍次数：<span> 0</span></div>
 </div>
 
 <!--拍品介绍 -->
@@ -133,16 +119,16 @@
 
   <div class="show">
     <span>拍品展示</span><br/>
-    <img src="images/jieshao1.jpg" alt=""/>
-    <img src="images/jieshao2.jpg" alt=""/>
-    <img src="images/jieshao3.jpg" alt=""/>
-    <img src="images/jieshao4.jpg" alt=""/>
+    <img src=" __IMAGES__/jieshao1.jpg" alt=""/>
+    <img src=" __IMAGES__/jieshao2.jpg" alt=""/>
+    <img src=" __IMAGES__/jieshao3.jpg" alt=""/>
+    <img src=" __IMAGES__/jieshao4.jpg" alt=""/>
     <p><strong>老檀匠在大小与重量上要求严格，力求每一串都做到足分足量，让竞拍者称心结缘！</strong></p>
-    <img src="images/jieshao5.jpg" alt=""/>
-    <img src="images/jieshao6.jpg" alt=""/>
+    <img src=" __IMAGES__/jieshao5.jpg" alt=""/>
+    <img src=" __IMAGES__/jieshao6.jpg" alt=""/>
     <p>木材纹理特殊，有旋转的细密花纹，效果奇异。小叶紫檀本身的稀有性，尤其自身油性大，极难产生瘿，加上其纹理炫丽，荧光强，所以极为珍贵。也因其木质坚硬，纹理炫丽，盘玩后光泽明显，极受玩珠爱好者青睐。</p>
-    <img src="images/jieshao7.jpg" alt=""/>
-    <img src="images/jieshao8.jpg" alt=""/>
+    <img src=" __IMAGES__/jieshao7.jpg" alt=""/>
+    <img src=" __IMAGES__/jieshao8.jpg" alt=""/>
     <p style="font:bold 1em '黑体';">此款手串金星密布，颗颗如此，实品就是如此，毫无修饰，所见即所得，一物一拍！</p>
   </div>
 
@@ -171,7 +157,7 @@
       <li>02 <span>拍卖过程中，系统通常会根据拍品价格提供三档竞拍价格，参与竞拍者可任选一档进行加价竞拍。拍卖进行中，竞拍者不能连续出价。</span></li>
       <li>03<span>每期拍卖的竞拍时间依照各场次情况由老檀匠佛珠确定，且原则上采用延时竞拍的方式，剩余竞拍时间小于1分30秒时如有竞拍者有效出价，则剩余竞拍时间自动调整为1分30秒，直至剩余竞拍时间为零则该期拍卖结束。</span></li>
       <li> 04 <span>每期拍卖结束时出价最高者为该期拍卖胜出者。</span></li>
-      <li>05<span>部分拍卖场次支持“一口价”功能，即：该期拍卖活动中老檀匠佛珠会根据本期拍卖商品的价值列出一个拍卖价格（即“一口价”，该价格并非该期拍卖商品的市场参考价格），若用户认可按该“一口价”价格购买商品，可在拍卖界面点取该“一口价”，此时当即时竞拍价格＜“一口价”价格时，则“一口价”出价用户视为该期拍卖胜出者，当期拍卖将立即结束。若无用户点取“一口价”或即时竞拍价格超过“一口价”时，则该期拍卖按照正常规则继续进行。若点取了“一口价”的用户作为该期拍卖胜出者未及时确认订单或确定放弃的，则该期拍品视为流拍。</span></li>
+      <li>05<span>部分拍卖场次支持“一口价”功能，即：该期拍卖活动中老檀匠佛珠会根据本期拍卖商品的价值列出一个拍卖价格（即“一口价”，该价格并非该期拍卖商品的市场参考价格），若用户认可按该“一口价”价格购买商品，可在拍卖界面点取该“一口价”，此时当即时竞拍价格“一口价”价格时，则“一口价”出价用户视为该期拍卖胜出者，当期拍卖将立即结束。若无用户点取“一口价”或即时竞拍价格超过“一口价”时，则该期拍卖按照正常规则继续进行。若点取了“一口价”的用户作为该期拍卖胜出者未及时确认订单或确定放弃的，则该期拍品视为流拍。</span></li>
       <li>06<span>每期拍卖结束至下期拍卖结束之前，当期胜出者应保持手机畅通等待老檀匠佛珠客服确认订单信息，也可在客服工作时间内主动与我们取得联系。如遇订单在规定时间内未得到当期胜出者确认或确定放弃的情况，老檀匠佛珠客服将停止联系该名竞拍客户，同时有权决定该期拍卖出价次高者为胜出者，并以此类推。出现上述情况时，老檀匠有权决定该期拍品最终是否流拍。如遇国家法定节假日或其他导致客服休假的情况，订单确认时间推迟，会在拍卖公告或拍品详情中标明。</span></li>
       <li>07<span>所有拍品订单一经签收，非质量问题不支持退换货，所有拍品均仅接受在线支付。</span></li>
       <li>08<span>如出现老檀匠佛珠客服所沟通用户均未能如期成功确认订单的情况，则该拍品视为流拍。若确认订单后，快递出的拍品经两次递送均未能被成功签收，则视为该期胜出者放弃购买该拍品。</span></li>
@@ -186,17 +172,16 @@
 </div>
 
 <!--初始化加载内容 -->
-<div id='dataserials' data-nowadays="Wed Jan 14 2015 22:43:12 GMT+0800 (CST)" data-id="2015011303" data-price="1500"  data-end='Thu Jan 15 2015 22:00:00 GMT+0800 (CST)' data-start='Thu Jan 15 2015 10:00:00 GMT+0800 (CST)'  data-open="oj2bTjt5RU10L3IIGAlrxac00Loo" data-uid="">
-</div>
+<div id="dataserials" data-open="{{$openid}}" data-nowadays="{{$data.nowadays}}" data-id="{{$data.pid}}" data-price="{{$data.proprice}}" data-name="{{$data.proname}}" data-start="{{$data.starttime}}" data-end="{{$data.endtime}}" data-uid="" data-fixedprice="{{$data.fixedprice}}" data-timeprice="{{$data.timeprice}}"></div>
 
 
 
   <!--脚本加载-->
-  <script src="js/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script>
-  <script src="js/jquery.flexslider-min.js" type="text/javascript" charset="utf-8"></script>
-  <script src="js/fastclick.js" type="text/javascript" charset="utf-8"></script>
+  <script src="__JS__/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="__JS__/jquery.flexslider-min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="__JS__/fastclick.js" type="text/javascript" charset="utf-8"></script>
    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-  <script src="js/fn.js" type="text/javascript" charset="utf-8"></script>
+  <script src="__JS__/fn.js" type="text/javascript" charset="utf-8"></script>
   
   <!--脚本加载 end-->
 

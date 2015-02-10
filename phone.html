@@ -11,7 +11,7 @@
   form input:nth-child(1){ border:solid 3px #990000;padding: 1% 0 1% 40px;height:28px; border-radius: 6px;
    font:normal 1em "黑体"; width:88%;}
    #form{margin-top: 10%;padding: 0 4%;}
-  #phone{background: url("images/icon.png") no-repeat center left;}
+  #phone{background: url("__IMAGES__/icon.png") no-repeat center left;}
   #submit{margin: 10% 0 0 30%;width: 30%;}
 </style>
  </head>
@@ -22,9 +22,9 @@
  </div>
 
  <div id="form">
- 	<form   >
-       <input type="tel" required placeholder="在此输入手机号"  id="phone" />
-       <input name="submit" type="image"  src="images/button.png"  id="submit" onclick="validate();"/>
+ 	<form action="" method="post" autocomplete="off">
+       <input type="tel" required placeholder="在此输入手机号" name="phone" id="phone" />
+       <input name="submit" type="image"  src="__IMAGES__/button.png"  id="submit" onclick="validate();return false;"/>
 
   
 </form>
@@ -38,12 +38,12 @@ function validate(){
   var reg = /(^13\d{9}$)|(^15[0,1,2,3,5,6,7,8,9]\d{8}$)|(^18[0,2,5,6,7,8,9]\d{8}$)|(^147\d{8}$)/g ;  
   if(phone.value==""){alert("手机号码不能为空");phone.focus();return false;}
   if(!reg.test(phone.value)){alert("手机号码格式不正确");phone.focus();return false;}
-  submitData(phone);
+  submitData();
 
 
 }
 
-function createXHR(){
+/*function createXHR(){
   if(typeof XMLHttpResquest != "undefined"){
     return new XMLHttpResquest;
   }else if(typeof ActiveXObject != "undefined"){
@@ -62,21 +62,36 @@ function createXHR(){
     }return new ActiveXObject(arguments.callee.activeXString);
 
   }else{throw new Error("no XHR object available.");}
-}
+}*/
+var xmlHttpRequest;
 
-function submitData(res){
-  var xhr=createXHR();
+function createXmlHttpRequest(){
+  if(window.ActiveXObject){ //如果是IE浏览器
+    return new ActiveXObject("Microsoft.XMLHTTP");
+    }else if(window.XMLHttpRequest){ //非IE浏览器
+      return new XMLHttpRequest();
+            }
+        }
+
+function submitData(){
+  var phone=document.getElementById("phone").value;
+  var xhr=createXmlHttpRequest();
   xhr.onreadystatechange=function(){
     if(xhr.readyState==4){
-      if((xhr.status>=200&&xhr.status<300)||xhr.status==304){
+      if(xhr.status == 200){
         alert("提交成功！");
-        window.location.href("index.html");
-      }else {alert("网络繁忙，请稍后重试");}
+          var ref = xhr.responseText;
+         //var str_recover=ref.replace(/(\\)/g,"");
+          window.location.href = ref;
+      }else{
+          alert("网络繁忙，请稍后重试");
+      }
     }
   };
-  xhr.open("post","url",true);
+  var url = "http://nfyqwx.nfmedia.com/user/mobile";
+  xhr.open("post",url,true);
   xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-  xhr.send(res);
+  xhr.send("phone="+phone);
 }
 
  </script>

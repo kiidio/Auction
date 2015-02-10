@@ -9,8 +9,13 @@ $(function(){
    token_user = $('#dataserials').data('open'),
    start = Date.parse($('#dataserials').data('start')) - Date.parse(now_temp),         //判断拍卖是否开始
    last_time = Date.parse($('#dataserials').data('end')) - Date.parse(now_temp),       //判断拍卖是否结束
-   user_id = $('#dataserials').data('uid');
+   pid = $('#dataserials').data('id'),
+   ykj_price=$('#dataserials').data('fixedprice');
    
+   var flag=1;//判断是否一口价
+  
+   
+
       //初始化
         initial();
 
@@ -18,8 +23,8 @@ $(function(){
         function initial(){
           click_event();   //绑定页面点击事件
           auction_state(start, last_time);   //判断拍卖状态
-          //update();    //更新界面数据
-          //setInterval(update, 5000);   //设置定时更新界面数据 
+          update();    //更新界面数据
+          setInterval(update, 10000);   //设置定时更新界面数据 
           share();
 
             //图片轮播
@@ -53,7 +58,8 @@ $(function(){
             $('.hover').addClass('origin');
             $('.hover').removeClass('hover');
             $dom.addClass('hover');
-            $(".hammerCnt ").text(($dom.hasClass('ykj') ? 8888 : $dom.find('p').text())+'拍');
+            flag=$dom.hasClass('ykj') ?1:0;
+            $(".hammerCnt ").text(($dom.hasClass('ykj') ? ykj_price : $dom.find('p').text())+'拍');
           }); 
 
           function sys_err(){
@@ -61,45 +67,55 @@ $(function(){
           }
           //拍卖按钮事件
          $('.hammer').on('fastclick',function(){
+
           if(!isWeixinBrowser()) 
             {alert("请您复制链接，在微信浏览器中打开");}
-          else if(start>0){
-              alert("竞拍还未开始，请您耐心等待");
-              }
-          else if(last_time<0){
-              alert("竞拍已结束，感谢您的关注");
-            }
+        
+           //else if(start>0){
+              //alert("竞拍还未开始，请您耐心等待");
+              //}
+         // else if(last_time<0){
+             // alert("竞拍已结束，感谢您的关注");
+           // }
+
           else {
-          
+               
             $.ajax({
-              url:'/manage/auction/check_phone/'  + '?open_id=' + token_user,
+              url:'http://nfyqwx.nfmedia.com/user/authorize?'  + 'openid=' + token_user,
               type: 'get',
               dataType: 'json',
               xhrFields: {
               withCredentials: true
               },
               success:function(res){
-                if(res){
-                    //有联系电话
-                if(res.errCode == 0){
-                       
-                    //没有联系电话
-                }else if(res.errCode == 1){
-                      
-                    //用户未登录
-                }else if(res.errCode == 2){
-                      
-                }else if(res.errCode == 3){
-                      
-                }else{
-                      sys_err();}
-                    }
-                  }
-                });
-         }
+                alert(res.errcode);
 
-        
-             });
+                if(res){
+                   
+                    //用户不存在（未授权）
+                if(res.errcode == 1){
+                       window.location.href='http://nfyqwx.nfmedia.com/user/guideAuth?site=wechat&ref=http://nfyqwx.nfmedia.com/auction/entrance?'+'pid='+pid;
+                    //没有联系电话
+                }
+                else if(res.errcode == 2){
+                       window.location.href='http://nfyqwx.nfmedia.com/user/mobile?site=wechat&ref=http://nfyqwx.nfmedia.com/auction/entrance?'+'pid='+pid;
+                      
+                    //有联系电话
+                }
+                else if(res.errcode == 3){
+                   chujia();
+                  
+               }
+                else {sys_err();}
+         
+            }
+            
+          },
+          error:function(){sys_err();}
+
+        });
+      }
+  });
 
 
          //微信分享按钮
@@ -107,8 +123,65 @@ $(function(){
          $('#share ').on('click',function(){
           alert("请点击右上角...分享");});
 
+         function chujia(){
+          
+          var proprize=$('.prize1').text().split('￥')[1];
+         
+          var price=flag==1?ykj_price:parseInt($('.hammerCnt').text())+parseInt(proprize);
+          
+          var $params = {pid: pid, price: price, openid: token_user,site: 'wechat', flag: flag};
 
-       }
+         
+          
+
+            $.ajax({
+              url: 'http://nfyqwx.nfmedia.com/product/price',
+              type: 'post',
+              dataType: 'json',
+              xhrFields: {
+                withCredentials: true
+              },
+              data: $.param($params),
+               success: function(data){
+                  if(data){
+                    alert(data.errcode);
+                    if(data.errcode==1){alert("恭喜您，出价成功！");update();}
+                    else if(data.errcode==4){alert("您的竞拍为最高价，请等待其他人出价");}
+                    else if(data.errcode==5){alert("竞拍成功，您已拍得商品");update();}
+                    else if(data.errcode==6){alert("竞拍时间未开始或已结束");}
+                    else if(data.errcode==8){alert("请在微信浏览器中打开");}
+                    else{alert(data.msg);}
+
+                      }
+                    },
+                    error:function(){sys_err();}
+
+                  });
+                  
+          /*$.ajax({
+
+             url:'http://nfyqwx.nfmedia.com/product/price',
+             dataType:'json',
+             data:JSON.stringify(postdata),
+             success: function(data){
+                  if(data){
+                    alert(data.errcode);
+                    if(data.errcode==1){alert("恭喜您，出价成功！");}
+                    else if(data.errcode==4){alert("您的竞拍为最高价，请等待其他人出价");}
+                    else if(data.errcode==5){alert("竞拍成功，您已拍得商品");}
+                    else if(data.errcode==6){alert("竞拍时间未开始或已结束");}
+                    else if(data.errcode==8){alert("请在微信浏览器中打开");}
+                    else{alert("else");}
+
+                      }
+                    },
+                    error:function(){sys_err();}
+
+                  });*/
+         }
+
+
+  }
 
     function share(){
 
@@ -122,7 +195,7 @@ $(function(){
             success: function(response){
               if(response) {
                 wx.config({
-                  debug: true, 
+                  debug: false, 
                   appId: response.appId,// 必填，公众号的唯一标识
                   timestamp: response.timestamp , // 必填，生成签名的时间戳
                   nonceStr: response.nonceStr , // 必填，生成签名的随机串
@@ -141,9 +214,9 @@ $(function(){
                 title: '喜迎旗下宝懿天猫旗舰店上线与众玩家狂欢0元起拍', // 分享标题
                 desc: '老檀匠佛珠-只做收藏级紫檀，为发烧而生', // 分享描述
                 link: url, // 分享链接
-                imgUrl: 'http://nfyqwx.nfmedia.com/thfb/images/logo.jpg'}// 分享图标;
-                wx.onMenuShareAppMessage(shareData);
-                wx.onMenuShareTimeline(shareData);
+                imgUrl: 'http://nfyqwx.nfmedia.com/thfb/images/logo.jpg'};// 分享图标;
+        wx.onMenuShareAppMessage(shareData);
+        wx.onMenuShareTimeline(shareData);
                   
 
          
@@ -169,6 +242,9 @@ $(function(){
                
               if(init_change) clearInterval(init_change);
               $hit.text('竞拍已结束');
+              $('span.hour').text('00');
+              $('span.minute').text('00');
+              $('span.second').text('00');
           //竞拍正在进行
             }else{
               count_left_time(last_time);
@@ -233,59 +309,48 @@ $(function(){
      
 
      //页面渲染更新
-        function update(){
-          //var pid = $('#dataserials').data('id'),
-              //openid = $('#dataserials').data('open') || '';
+       function update(){
+         var  openid = $('#dataserials').data('open') || '';
+         
 
-          /*$.ajax({
-            //url: 'time.php?pid=' + pid + '&open_id=' + openid,
-            url: 'time.php',
+
+          $.ajax({
+            url: 'http://nfyqwx.nfmedia.com/Message/update?pid=' + pid + '&openid=' + openid,
             type: 'get',
             dataType: 'json',
             success: function(response){
-              if(response) {
-                console.log(response);
+              if(response.errcode==1) {
+                
                 //倒计时刷新
-                getLastTime(response);
+                getLastTime(response.msginfo);
                 //出价记录刷新
-                auction_list(response);
+                auction_list(response.msginfo);
                 //当前拍卖价刷新　
-                $('.prize1').text('￥'+response.current.price);
+                $('.prize1').text('￥'+response.msginfo.current.price);
                 //当前出价人数刷新
-                $(".total").find('span').html(response.current.count);
+                $(".total").find('span').html(response.msginfo.current.count);
+
+                
                 
               }
+              else{alert("异步刷新失败");}
 
             },
-            error:function(){}
+            error:function(){alert('网络系统异常，请稍后再试!');}
           });
-           $.getJSON("result.json",function(response){
-
-             if(response) {
-                //倒计时刷新
-                getLastTime(response);
-                //出价记录刷新
-                auction_list(response);
-                //当前拍卖价刷新　
-                $('.prize1').text('￥'+response.current.price);
-                //当前出价人数刷新
-                $(".total").find('span').html(response.current.count);}
-
-
-
-           }
-
+           
           //出价记录更新
           function auction_list(res){
-            var count=$(".total").find('span').text();
-            if(res.current.count==count) return;
+           
             
+            //出价列表刷新
             var list_html = [];
 
-            res.list.forEach(function(i){
+            res.current.mobilelist.forEach(function(i){
               
 
-              list_html.push("<ul><li>￥" + i.price + "</li><li>" + i.mobile + "</li><li>" + i.time + "</li></ul>");
+              list_html.push("<ul><li>￥" + i.personprice + "</li><li>" + i.mobile + "</li><li>" + i.updatetime + "</li></ul>");
+              
             });
 
             $('div.recordlist').html(list_html.join(''));
@@ -295,11 +360,11 @@ $(function(){
 
           //刷新倒计时
           function getLastTime(res){
-            var now_time = new Date(res.now);
-            last_time = Date.parse(res.end_time) - Date.parse(now_time);
-            start = Date.parse(res.start_time)-Date.parse(now_time);
+            var now_time = new Date(res.nowadays);
+            last_time = Date.parse(res.endtime) - Date.parse(now_time);
+            start = Date.parse(res.starttime)-Date.parse(now_time);
             auction_state(start, last_time);
-          }*/
+          }
 
         }
         
