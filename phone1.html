@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>手机号填写页面</title>
+  
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style type="text/css">
+
+  .hit{padding: 0 3%;margin-top:22%;font: normal  1em "幼圆";}
+  form input:nth-child(1){ border:solid 3px #990000;padding: 1% 0 1% 40px;height:28px; border-radius: 6px;
+   font:normal 1em "黑体"; width:88%;}
+   #form{margin-top: 10%;padding: 0 4%;}
+  #phone{background: url("__IMAGES__/icon.png") no-repeat center left;}
+  #submit{margin: 10% 0 0 30%;width: 30%;}
+</style>
+ </head>
+ 
+ <body>
+ <div class="hit">
+  <p>【<strong>温馨提示：</strong>请务必保持手机畅通，客服将会人工验证手机号码，确认拍卖事宜。如您填写的电话号码无法确认，您的出价视为无效，拍卖记录将被删除。】</p>
+ </div>
+
+ <div id="form">
+ 	<form   >
+       <input type="tel" required placeholder="在此输入手机号" name="phone" id="phone" />
+       <input name="submit" type="image"  src="__IMAGES__/button.png"  id="submit" onclick="validate();return false;"/>
+
+  
+</form>
+</div>
+
+
+ </body>
+ <script src="__JS__/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script>
+ <script type="text/javascript" >    
+ function validate(){
+   var phone=$('#phone');
+   var reg = /(^13\d{9}$)|(^15[0,1,2,3,5,6,7,8,9]\d{8}$)|(^18[0,2,5,6,7,8,9]\d{8}$)|(^147\d{8}$)/g ;
+   if(phone.value==""){alert("手机号码不能为空");phone.focus();return false;}
+   if(!reg.test(phone.value)){alert("手机号码格式不正确");phone.focus();return false;}
+    $.ajax({
+        url:'http://nfyqwx.nfmedia.com/user/mobile' ,
+        type: 'post',
+        data:{"phone":phone},
+        dataType: 'json',
+        xhrFields: {
+            withCredentials: true
+                    },
+        success:function(res){
+          if(res.msg==1){alert("提交成功！");window.location.href="http://nfyqwx.nfmedia.com/auction/entrance?pid=2015012701";}
+        },
+         error:function(){alert("网络系统异常，请稍后重试");}
+ }
+ </script>
+</html>
